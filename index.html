@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GKPhysics — Gamma Knife Physics Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Josefin+Sans:wght@400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#16213e;color:#e8e8e8;font-family:Inter,sans-serif;line-height:1.6;}
+a{color:#D97757;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* Header */
+.header{background:#111827;border-bottom:1px solid #2d3748;padding:1rem 2rem;display:flex;align-items:center;gap:0.8rem;}
+.logo{width:40px;height:40px;background:#D97757;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-weight:900;font-size:1rem;color:#0f0f0f;}
+.brand{font-family:'Josefin Sans',sans-serif;font-weight:400;font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;color:#D97757;}
+.tagline{margin-left:auto;font-size:0.75rem;color:#64748b;max-width:400px;text-align:right;}
+
+/* Hero */
+.hero{text-align:center;padding:3rem 2rem 1.5rem;}
+.hero h1{font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;}
+.hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto;}
+.principles{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;font-size:0.8rem;font-weight:600;}
+.p-red{color:#ff6b6b;}.p-green{color:#9be36b;}.p-blue{color:#60a5fa;}
+
+/* Screenshot */
+.screenshot{text-align:center;padding:1rem 2rem 2rem;}
+.screenshot img{max-width:960px;width:100%;border-radius:10px;border:1px solid #2d3748;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.screenshot .caption{color:#64748b;font-size:0.75rem;margin-top:0.5rem;}
+
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;padding:2rem;max-width:960px;margin:0 auto;}
+.card{background:#1a1a2e;border:1px solid #2d3748;border-radius:8px;padding:1.2rem;}
+.card h3{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;color:#64748b;text-transform:uppercase;margin-bottom:0.6rem;}
+.card ul{list-style:none;padding:0;}
+.card li{font-size:0.85rem;padding:0.25rem 0;display:flex;align-items:center;gap:0.5rem;}
+.card li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.live::before{background:#76b900;}.dev::before{background:#64748b;}.docs::before{background:#60a5fa;}.local::before{background:#eab308;}
+.tag{font-size:0.6rem;color:#64748b;font-style:italic;margin-left:auto;}
+
+/* About */
+.about{max-width:700px;margin:2rem auto;padding:2rem;background:#1a1a2e;border:1px solid #2d3748;border-radius:8px;}
+.about h2{font-size:1.2rem;margin-bottom:0.8rem;color:#D97757;}
+.about p{color:#94a3b8;font-size:0.9rem;margin-bottom:0.6rem;}
+.about .formula{font-family:'JetBrains Mono',monospace;background:#0f0f0f;border:1px solid #2d3748;border-radius:5px;padding:0.8rem;margin:0.8rem 0;font-size:0.85rem;color:#D97757;}
+
+/* CTA */
+.cta{text-align:center;padding:2.5rem 2rem 3rem;}
+.cta h2{font-size:1.4rem;margin-bottom:0.5rem;}
+.cta p{color:#94a3b8;font-size:0.95rem;margin-bottom:1rem;}
+.cta a.btn{display:inline-block;background:#76b900;color:#0f0f0f;font-weight:700;padding:0.7rem 2rem;border-radius:6px;font-size:1rem;text-decoration:none;}
+.cta a.btn:hover{background:#8cd41a;text-decoration:none;}
+
+/* Footer */
+.footer{background:#111827;border-top:1px solid #2d3748;text-align:center;padding:1.2rem;font-size:0.7rem;color:#64748b;}
+
+/* Legend */
+.legend{display:flex;justify-content:center;gap:1.5rem;padding:0 2rem 1rem;font-size:0.75rem;color:#64748b;}
+.legend span{display:flex;align-items:center;gap:0.3rem;}
+.legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
+.dot-live{background:#76b900;}.dot-dev{background:#64748b;}.dot-docs{background:#60a5fa;}.dot-local{background:#eab308;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">GK</div>
+  <div class="brand">Gamma Knife</div>
+  <div class="tagline">Physics tools for the Gamma Knife community — validated across Perfexion, Icon, and Esprit</div>
+</div>
+
+<div class="hero">
+  <h1>GKPhysics Tools</h1>
+  <p>A modular platform for Gamma Knife medical physicists. Cloud-based machine tools, local patient workflows, one unified interface.</p>
+  <div class="principles">
+    <span class="p-red">First Principles</span>
+    <span class="p-green">Simple, not simpler</span>
+    <span class="p-blue">Trust, but verify</span>
+  </div>
+</div>
+
+<div class="screenshot">
+  <img src="img/dr_full.png" alt="GK Hub — Dose Rate Calculator">
+  <div class="caption">Dose Rate Calculator — community-fitted S factor, validated across 5 machines (3 models, 2 sites)</div>
+</div>
+
+<div class="legend">
+  <span><span class="dot dot-live"></span> Live</span>
+  <span><span class="dot dot-dev"></span> In Development</span>
+  <span><span class="dot dot-docs"></span> Documentation</span>
+  <span><span class="dot dot-local"></span> Local Only (HIPAA)</span>
+</div>
+
+<div class="features">
+  <div class="card">
+    <h3>Machine Tools</h3>
+    <ul>
+      <li class="live">Dose Rate Calculator <span class="tag">live</span></li>
+      <li class="dev">Monthly QA Dashboard <span class="tag">dev</span></li>
+      <li class="dev">Timer Error Analysis <span class="tag">dev</span></li>
+      <li class="docs">Profile Database <span class="tag">docs</span></li>
+      <li class="docs">Cable Reference <span class="tag">docs</span></li>
+      <li class="docs">HDMM Protocol <span class="tag">docs</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Patient Workflows</h3>
+    <ul>
+      <li class="local">Patient Query <span class="tag">local</span></li>
+      <li class="local">Today's Schedule <span class="tag">local</span></li>
+      <li class="local">Treatment Status <span class="tag">local</span></li>
+    </ul>
+    <p style="font-size:0.7rem;color:#64748b;margin-top:0.5rem;border-top:1px solid #2d3748;padding-top:0.5rem;">
+      🔒 Patient data never leaves your network. HIPAA compliant by design.
+    </p>
+  </div>
+  <div class="card">
+    <h3>Dashboards</h3>
+    <ul>
+      <li class="dev">Overview <span class="tag">dev</span></li>
+      <li class="dev">Nurse Station <span class="tag">dev</span></li>
+      <li class="dev">Physicist Station <span class="tag">dev</span></li>
+      <li class="dev">Admin Station <span class="tag">dev</span></li>
+    </ul>
+    <p style="font-size:0.7rem;color:#64748b;margin-top:0.5rem;border-top:1px solid #2d3748;padding-top:0.5rem;">
+      Role-based views — each station sees what they need.
+    </p>
+  </div>
+  <div class="card">
+    <h3>Technical Stack</h3>
+    <ul>
+      <li class="docs" style="font-size:0.8rem;">Python 3.12 + NiceGUI</li>
+      <li class="docs" style="font-size:0.8rem;">SQLite (machine data)</li>
+      <li class="docs" style="font-size:0.8rem;">Community S-factor model</li>
+      <li class="docs" style="font-size:0.8rem;">Modular: 1 tool = 1 file</li>
+    </ul>
+  </div>
+</div>
+
+<div class="about">
+  <h2>About the Dose Rate Calculator</h2>
+  <p>Gamma Knife dose rate drifts from estimated values due to source geometry effects beyond simple Co-60 decay. The community-fitted scale factor <strong>S</strong> corrects for this systematic difference.</p>
+  <div class="formula">
+    DR<sub>corrected</sub> = S × DR<sub>estimated</sub><br>
+    S = 0.9452 (fitted from 16 measurements across 2 institutions)<br>
+    T½ = 1925.2 days (NIST Co-60, not Elekta's 5.26 yr)
+  </div>
+  <p>Validated across <strong>Perfexion, Icon, and Esprit</strong> — same source assembly, same S. Five verified cases show ≤1% agreement with independent TLD measurements.</p>
+  <p style="font-size:0.8rem;color:#64748b;">Machine physics data is cloud-safe. Patient data stays local — always.</p>
+</div>
+
+<div class="cta">
+  <h2>Interested in using these tools?</h2>
+  <p>GK Hub is actively developed. If you're a Gamma Knife physicist, dosimetrist, or researcher — let's connect.</p>
+  <a class="btn" href="mailto:coder3q@gmail.com?subject=GKPhysics%20Tools%20—%20Interested">Email Me →</a>
+  <p style="font-size:0.75rem;color:#64748b;margin-top:0.8rem;">coder3q@gmail.com</p>
+</div>
+
+<div class="footer">
+  © 2026 GKPhysics — Validated across Perfexion, Icon, and Esprit
+</div>
+
+</body>
+</html>
