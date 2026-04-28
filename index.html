@@ -4,162 +4,298 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GKPhysics — Gamma Knife Physics Tools</title>
+<meta property="og:title" content="GKPhysics — Gamma Knife Physics Tools">
+<meta property="og:description" content="A modular platform for Gamma Knife medical physicists. Validated across Perfexion, Icon, and Esprit.">
+<meta property="og:url" content="https://coder3q.github.io/gkphysics/">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Josefin+Sans:wght@400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:#16213e;color:#e8e8e8;font-family:Inter,sans-serif;line-height:1.6;}
+body{background:#16213e;color:#e8e8e8;font-family:Inter,sans-serif;line-height:1.6;display:flex;min-height:100vh;}
 a{color:#D97757;text-decoration:none;}
-a:hover{text-decoration:underline;}
+
+/* Sidebar */
+.sidebar{width:200px;background:#111827;border-right:1px solid #2d3748;padding:1rem 0.75rem;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;display:flex;flex-direction:column;}
+.sidebar .brand-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.25rem;}
+.sidebar .logo{width:34px;height:34px;background:#D97757;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-weight:900;font-size:0.9rem;color:#0f0f0f;flex-shrink:0;}
+.sidebar .brand-text{font-family:Arial Narrow,Arial,sans-serif;font-weight:400;font-size:1.15rem;letter-spacing:0.08em;font-style:italic;color:#D97757;}
+.principles{display:flex;flex-direction:column;gap:0.15rem;padding-left:0.25rem;margin-top:0.4rem;margin-bottom:0.5rem;}
+.principles span{font-size:0.8rem;font-weight:600;}
+.p-red{color:#ff6b6b;}.p-green{color:#9be36b;}.p-blue{color:#60a5fa;}
+.sidebar hr{border:none;border-top:1px solid #2d3748;margin:0.4rem 0;}
+.sec-title{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;color:#94a3b8;padding-left:0.5rem;margin-top:0.5rem;margin-bottom:0.2rem;}
+.nav-item{display:flex;align-items:center;gap:0.4rem;padding:0.35rem 0.5rem;border-radius:5px;font-size:0.8rem;color:#94a3b8;font-weight:400;cursor:pointer;transition:all 0.15s;}
+.nav-item:hover{background:rgba(217,119,87,0.08);color:#94a3b8;}
+.nav-item.active{background:rgba(217,119,87,0.15);color:#D97757;font-weight:600;}
+.nav-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot-live{background:#3d6b00;}.dot-local{background:#eab308;}
+.nav-tag{font-size:0.65rem;color:#64748b;font-style:italic;margin-left:auto;}
+.sidebar-footer{margin-top:auto;font-size:0.6rem;color:#64748b;line-height:1.5;padding-top:0.5rem;}
+
+/* Main content */
+.main{margin-left:200px;flex:1;display:flex;flex-direction:column;}
 
 /* Header */
-.header{background:#111827;border-bottom:1px solid #2d3748;padding:1rem 2rem;display:flex;align-items:center;gap:0.8rem;}
-.logo{width:40px;height:40px;background:#D97757;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-weight:900;font-size:1rem;color:#0f0f0f;}
-.brand{font-family:'Josefin Sans',sans-serif;font-weight:400;font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;color:#D97757;}
-.tagline{margin-left:auto;font-size:0.75rem;color:#64748b;max-width:400px;text-align:right;}
+.header{background:#111827;border-bottom:1px solid #2d3748;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.header h1{font-size:1.1rem;font-weight:700;}
+.header .tagline{font-size:0.85rem;color:#94a3b8;max-width:500px;text-align:right;}
 
-/* Hero */
-.hero{text-align:center;padding:3rem 2rem 1.5rem;}
-.hero h1{font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;}
-.hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto;}
-.principles{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;font-size:0.8rem;font-weight:600;}
-.p-red{color:#ff6b6b;}.p-green{color:#9be36b;}.p-blue{color:#60a5fa;}
+/* Tool view */
+.tool-view{display:none;padding:1.5rem 2rem;flex:1;}
+.tool-view.active{display:block;}
+.tool-view h2{font-size:1.5rem;font-weight:700;margin-bottom:0.3rem;}
+.tool-view .tool-desc{color:#94a3b8;font-size:0.9rem;margin-bottom:1rem;}
+.tool-view .tool-tags{display:flex;gap:0.5rem;margin-bottom:1rem;}
+.tool-tag{font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:3px;font-weight:600;}
+.tag-live{background:rgba(118,185,0,0.15);color:#9be36b;}
+.tag-local{background:rgba(234,179,8,0.15);color:#eab308;}
+.tag-hipaa{background:rgba(255,107,107,0.15);color:#ff6b6b;}
+.tool-view img{max-width:100%;border-radius:8px;border:1px solid #2d3748;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+.tool-view .caption{color:#64748b;font-size:0.7rem;margin-top:0.4rem;}
 
-/* Screenshot */
-.screenshot{text-align:center;padding:1rem 2rem 2rem;}
-.screenshot img{max-width:960px;width:100%;border-radius:10px;border:1px solid #2d3748;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
-.screenshot .caption{color:#64748b;font-size:0.75rem;margin-top:0.5rem;}
-
-/* Features */
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;padding:2rem;max-width:960px;margin:0 auto;}
-.card{background:#1a1a2e;border:1px solid #2d3748;border-radius:8px;padding:1.2rem;}
-.card h3{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;color:#64748b;text-transform:uppercase;margin-bottom:0.6rem;}
-.card ul{list-style:none;padding:0;}
-.card li{font-size:0.85rem;padding:0.25rem 0;display:flex;align-items:center;gap:0.5rem;}
-.card li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.live::before{background:#76b900;}.dev::before{background:#64748b;}.docs::before{background:#60a5fa;}.local::before{background:#eab308;}
-.tag{font-size:0.6rem;color:#64748b;font-style:italic;margin-left:auto;}
-
-/* About */
-.about{max-width:700px;margin:2rem auto;padding:2rem;background:#1a1a2e;border:1px solid #2d3748;border-radius:8px;}
-.about h2{font-size:1.2rem;margin-bottom:0.8rem;color:#D97757;}
-.about p{color:#94a3b8;font-size:0.9rem;margin-bottom:0.6rem;}
-.about .formula{font-family:'JetBrains Mono',monospace;background:#0f0f0f;border:1px solid #2d3748;border-radius:5px;padding:0.8rem;margin:0.8rem 0;font-size:0.85rem;color:#D97757;}
+/* Details box */
+.detail-box{background:#1a1a2e;border:1px solid #2d3748;border-radius:8px;padding:1rem;margin-top:1rem;}
+.detail-box h3{font-size:0.85rem;color:#D97757;margin-bottom:0.4rem;}
+.detail-box p{color:#94a3b8;font-size:0.85rem;margin-bottom:0.3rem;}
+.detail-box .formula{font-family:'JetBrains Mono',monospace;background:#0f0f0f;border:1px solid #2d3748;border-radius:5px;padding:0.6rem;margin:0.5rem 0;font-size:0.8rem;color:#D97757;}
 
 /* CTA */
-.cta{text-align:center;padding:2.5rem 2rem 3rem;}
-.cta h2{font-size:1.4rem;margin-bottom:0.5rem;}
-.cta p{color:#94a3b8;font-size:0.95rem;margin-bottom:1rem;}
-.cta a.btn{display:inline-block;background:#76b900;color:#0f0f0f;font-weight:700;padding:0.7rem 2rem;border-radius:6px;font-size:1rem;text-decoration:none;}
-.cta a.btn:hover{background:#8cd41a;text-decoration:none;}
+.cta{text-align:center;padding:2rem;border-top:1px solid #2d3748;margin-top:auto;}
+.cta h2{font-size:1.2rem;margin-bottom:0.3rem;}
+.cta p{color:#94a3b8;font-size:0.9rem;margin-bottom:0.8rem;}
+.cta a.btn{display:inline-block;background:#3d6b00;color:#0f0f0f;font-weight:700;padding:0.6rem 1.8rem;border-radius:6px;font-size:0.95rem;}
+.cta a.btn:hover{background:#76b900;}
+.cta .email{font-size:0.85rem;color:#94a3b8;margin-top:0.5rem;}
 
 /* Footer */
-.footer{background:#111827;border-top:1px solid #2d3748;text-align:center;padding:1.2rem;font-size:0.7rem;color:#64748b;}
+.footer{background:#111827;border-top:1px solid #2d3748;text-align:center;padding:0.8rem;font-size:0.65rem;color:#64748b;}
 
-/* Legend */
-.legend{display:flex;justify-content:center;gap:1.5rem;padding:0 2rem 1rem;font-size:0.75rem;color:#64748b;}
-.legend span{display:flex;align-items:center;gap:0.3rem;}
-.legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
-.dot-live{background:#76b900;}.dot-dev{background:#64748b;}.dot-docs{background:#60a5fa;}.dot-local{background:#eab308;}
+/* Mobile */
+@media(max-width:768px){
+  .sidebar{width:100%;position:relative;height:auto;flex-direction:row;flex-wrap:wrap;padding:0.5rem;}
+  .main{margin-left:0;}
+  .principles,.sidebar-footer,.sec-title,hr{display:none;}
+  .nav-item{font-size:0.65rem;padding:0.25rem 0.4rem;}
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">GK</div>
-  <div class="brand">Gamma Knife</div>
-  <div class="tagline">Physics tools for the Gamma Knife community — validated across Perfexion, Icon, and Esprit</div>
-</div>
-
-<div class="hero">
-  <h1>GKPhysics Tools</h1>
-  <p>A modular platform for Gamma Knife medical physicists. Cloud-based machine tools, local patient workflows, one unified interface.</p>
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="brand-row">
+    <div class="logo">GK</div>
+    <div class="brand-text">Gamma Knife</div>
+  </div>
   <div class="principles">
-    <span class="p-red">First Principles</span>
+    <span class="p-red">First Principles First</span>
     <span class="p-green">Simple, not simpler</span>
     <span class="p-blue">Trust, but verify</span>
   </div>
-</div>
+  <hr>
 
-<div class="screenshot">
-  <img src="img/dr_full.jpg" alt="GK Hub — Dose Rate Calculator">
-  <div class="caption">Dose Rate Calculator — community-fitted S factor, validated across 5 machines (3 models, 2 sites)</div>
-</div>
-
-<div class="legend">
-  <span><span class="dot dot-live"></span> Live</span>
-  <span><span class="dot dot-dev"></span> In Development</span>
-  <span><span class="dot dot-docs"></span> Documentation</span>
-  <span><span class="dot dot-local"></span> Local Only (HIPAA)</span>
-</div>
-
-<div class="features">
-  <div class="card">
-    <h3>Machine Tools</h3>
-    <ul>
-      <li class="live">Dose Rate Calculator <span class="tag">live</span></li>
-      <li class="dev">Monthly QA Dashboard <span class="tag">dev</span></li>
-      <li class="dev">Timer Error Analysis <span class="tag">dev</span></li>
-      <li class="docs">Profile Database <span class="tag">docs</span></li>
-      <li class="docs">Cable Reference <span class="tag">docs</span></li>
-      <li class="docs">HDMM Protocol <span class="tag">docs</span></li>
-    </ul>
+  <div class="sec-title">PATIENT</div>
+  <div class="nav-item active" onclick="showTool('airport')">
+    <span class="nav-dot dot-local"></span>Airport Display<span class="nav-tag">local</span>
   </div>
-  <div class="card">
-    <h3>Patient Workflows</h3>
-    <ul>
-      <li class="local">Patient Query <span class="tag">local</span></li>
-      <li class="local">Today's Schedule <span class="tag">local</span></li>
-      <li class="local">Treatment Status <span class="tag">local</span></li>
-    </ul>
-    <p style="font-size:0.7rem;color:#64748b;margin-top:0.5rem;border-top:1px solid #2d3748;padding-top:0.5rem;">
-      🔒 Patient data never leaves your network. HIPAA compliant by design.
-    </p>
+  <div class="nav-item" onclick="showTool('statistics')">
+    <span class="nav-dot dot-local"></span>Statistics<span class="nav-tag">local</span>
   </div>
-  <div class="card">
-    <h3>Dashboards</h3>
-    <ul>
-      <li class="dev">Overview <span class="tag">dev</span></li>
-      <li class="dev">Nurse Station <span class="tag">dev</span></li>
-      <li class="dev">Physicist Station <span class="tag">dev</span></li>
-      <li class="dev">Admin Station <span class="tag">dev</span></li>
-    </ul>
-    <p style="font-size:0.7rem;color:#64748b;margin-top:0.5rem;border-top:1px solid #2d3748;padding-top:0.5rem;">
-      Role-based views — each station sees what they need.
-    </p>
+  <div class="nav-item" onclick="showTool('search')">
+    <span class="nav-dot dot-local"></span>Search<span class="nav-tag">local</span>
   </div>
-  <div class="card">
-    <h3>Technical Stack</h3>
-    <ul>
-      <li class="docs" style="font-size:0.8rem;">Python 3.12 + NiceGUI</li>
-      <li class="docs" style="font-size:0.8rem;">SQLite (machine data)</li>
-      <li class="docs" style="font-size:0.8rem;">Community S-factor model</li>
-      <li class="docs" style="font-size:0.8rem;">Modular: 1 tool = 1 file</li>
-    </ul>
+  <hr>
+
+  <div class="sec-title">MACHINE</div>
+  <div class="nav-item" onclick="showTool('dose-rate')">
+    <span class="nav-dot dot-live"></span>Dose Rate<span class="nav-tag">live</span>
   </div>
+  <div class="nav-item" onclick="showTool('cable')">
+    <span class="nav-dot dot-live"></span>Cable Extension<span class="nav-tag">live</span>
+  </div>
+  <div class="nav-item" onclick="showTool('hdmm')">
+    <span class="nav-dot dot-live"></span>HDMM 0.01mm<span class="nav-tag">live</span>
+  </div>
+  <div class="nav-item" onclick="showTool('filmless')">
+    <span class="nav-dot dot-live"></span>Filmless Profile<span class="nav-tag">live</span>
+  </div>
+  <div class="nav-item" onclick="showTool('timer-error')">
+    <span class="nav-dot dot-live"></span>Timer Error<span class="nav-tag">live</span>
+  </div>
+  <hr>
+
+  </div>
+
+  <div class="nav-item" onclick="showTool('about')">
+    <span class="nav-dot" style="background:#64748b;"></span>About
+  </div>
+  <div class="nav-item" onclick="showTool('contact')">
+    <span class="nav-dot" style="background:#64748b;"></span>Contact
+  </div>
+
+  <div class="sidebar-footer">
+    2026 Gamma Knife<br>
+    Validated across Perfexion,<br>Icon, and Esprit
+  </div>
+</nav>
+
+<!-- Main -->
+<div class="main">
+  <div class="header">
+    <h1>GKPhysics Tools</h1>
+    <div class="tagline">A modular platform for Gamma Knife medical physicists</div>
+  </div>
+
+  <!-- PATIENT: Airport Display -->
+  <div class="tool-view active" id="tool-airport">
+    <h2>Airport Display</h2>
+    <div class="tool-desc">Real-time treatment schedule board — designed for waiting area monitors and nurse stations.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-local">Local Only</span>
+      <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
+    </div>
+    <img src="img/airport.jpg" alt="Airport Display">
+    <div class="caption">Live schedule view — patient data stays within your network</div>
+  </div>
+
+  <!-- PATIENT: Statistics -->
+  <div class="tool-view" id="tool-statistics">
+    <h2>Statistics</h2>
+    <div class="tool-desc">Treatment volume analytics — cases by diagnosis, machine, physician, and time period.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-local">Local Only</span>
+      <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
+    </div>
+    <img src="img/statistics.jpg" alt="Statistics">
+    <div class="caption">Aggregated treatment statistics from your local database</div>
+  </div>
+
+  <!-- PATIENT: Search -->
+  <div class="tool-view" id="tool-search">
+    <h2>Search</h2>
+    <div class="tool-desc">Find any patient, any treatment, any date — instant full-text search across your treatment database.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-local">Local Only</span>
+      <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
+    </div>
+    <img src="img/search.jpg" alt="Search">
+    <div class="caption">Full-text search across treatment records</div>
+  </div>
+
+  <!-- MACHINE: Dose Rate -->
+  <div class="tool-view" id="tool-dose-rate">
+    <h2>Dose Rate Calculator</h2>
+    <div class="tool-desc">Community-fitted S factor corrects systematic dose rate drift beyond simple Co-60 decay.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-live">Live — Cloud OK</span>
+    </div>
+    <img src="img/dose-rate.jpg" alt="Dose Rate Calculator">
+    <div class="caption">Validated across 5 machines (3 models, 2 sites)</div>
+    <div class="detail-box">
+      <h3>Physics</h3>
+      <div class="formula">
+        DR<sub>corrected</sub> = S × DR<sub>estimated</sub><br>
+        S = 0.9452 (community-fitted, 16 measurements, 2 institutions)<br>
+        T½ = 1925.2 days (NIST Co-60)
+      </div>
+      <p>Perfexion, Icon, and Esprit share the same source assembly → same S factor.</p>
+      <p>Each contribution refines the model. Anonymous. Transparent.</p>
+    </div>
+  </div>
+
+  <!-- MACHINE: Cable Extension -->
+  <div class="tool-view" id="tool-cable">
+    <h2>Cable Extension</h2>
+    <div class="tool-desc">Automated cable length correction analysis — eliminates manual spreadsheet work.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-live">Live — Cloud OK</span>
+    </div>
+    <img src="img/cable.jpg" alt="Cable Extension">
+    <div class="caption">Cable extension measurement and analysis tool</div>
+  </div>
+
+  <!-- MACHINE: HDMM 0.01mm -->
+  <div class="tool-view" id="tool-hdmm">
+    <h2>HDMM Tool — 0.01mm Precision</h2>
+    <div class="tool-desc">High-Definition Motion Management analysis at 0.01mm resolution — beyond standard QA precision.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-live">Live — Cloud OK</span>
+    </div>
+    <img src="img/hdmm.jpg" alt="HDMM Tool">
+    <div class="caption">HDMM measurement at 0.01mm precision</div>
+  </div>
+
+  <!-- MACHINE: Filmless Profile -->
+  <div class="tool-view" id="tool-filmless">
+    <h2>Filmless Profile</h2>
+    <div class="tool-desc">Beam profile analysis without film — digital measurement replaces traditional film dosimetry.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-live">Live — Cloud OK</span>
+    </div>
+    <img src="img/filmless.jpg" alt="Filmless Profile">
+    <div class="caption">Digital beam profile measurement — no film required</div>
+  </div>
+
+  <!-- MACHINE: Timer Error -->
+  <div class="tool-view" id="tool-timer-error">
+    <h2>Timer Error — All 3 Collimators</h2>
+    <div class="tool-desc">Timer error analysis across 4mm, 8mm, and 16mm collimators — one measurement session, all results.</div>
+    <div class="tool-tags">
+      <span class="tool-tag tag-live">Live — Cloud OK</span>
+    </div>
+    <img src="img/timer-error.jpg" alt="Timer Error">
+    <div class="caption">Timer error for 4mm, 8mm, and 16mm collimators</div>
+  </div>
+
+  <!-- About -->
+  <div class="tool-view" id="tool-about">
+    <h2>About GKPhysics</h2>
+    <div class="detail-box">
+      <h3>Philosophy</h3>
+      <p><strong style="color:#ff6b6b;">First Principles First</strong> — Every tool answers: what root problem does this solve?</p>
+      <p><strong style="color:#9be36b;">Simple, not simpler</strong> — Minimal design covering current needs + obvious next steps.</p>
+      <p><strong style="color:#60a5fa;">Trust, but verify</strong> — Every calculation has a defined verification path.</p>
+    </div>
+    <div class="detail-box" style="margin-top:0.8rem;">
+      <h3>Architecture</h3>
+      <p>Built with Python 3.12 + NiceGUI. SQLite for machine data.</p>
+      <p>Modular: one tool = one file. Each tool is self-contained.</p>
+      <p>Patient data stays local (HIPAA). Machine physics data is cloud-safe.</p>
+      <p>Validated across <strong>Perfexion, Icon, and Esprit</strong>.</p>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="tool-view" id="tool-contact">
+    <h2>Contact</h2>
+    <div class="detail-box">
+      <h3>Interested in using these tools?</h3>
+      <p>GK Hub is actively developed. If you're a Gamma Knife physicist, dosimetrist, or researcher — let's connect.</p>
+      <p style="margin-top:0.8rem;"><a class="btn" href="mailto:gkresearch.nyu@gmail.com?subject=GKPhysics%20Tools%20—%20Interested" style="display:inline-block;background:#3d6b00;color:#0f0f0f;font-weight:700;padding:0.6rem 1.8rem;border-radius:6px;font-size:0.95rem;text-decoration:none;">Email Me →</a></p>
+      <p style="font-size:0.8rem;color:#64748b;margin-top:0.5rem;">gkresearch.nyu@gmail.com</p>
+    </div>
+  </div>
+
+  <!-- CTA (always visible at bottom) -->
+  <div class="cta">
+    <h2>Interested in these tools?</h2>
+    <p>If you're a Gamma Knife physicist — let's connect.</p>
+    <a class="btn" href="mailto:gkresearch.nyu@gmail.com?subject=GKPhysics%20Tools%20—%20Interested">Email Me →</a>
+    <div class="email" style="font-size:0.85rem;color:#94a3b8;margin-top:0.6rem;">gkresearch.nyu@gmail.com</div>
+  </div>
+
+  <div class="footer">© 2026 GKPhysics — Validated across Perfexion, Icon, and Esprit</div>
 </div>
 
-<div class="about">
-  <h2>About the Dose Rate Calculator</h2>
-  <p>Gamma Knife dose rate drifts from estimated values due to source geometry effects beyond simple Co-60 decay. The community-fitted scale factor <strong>S</strong> corrects for this systematic difference.</p>
-  <div class="formula">
-    DR<sub>corrected</sub> = S × DR<sub>estimated</sub><br>
-    S = 0.9452 (fitted from 16 measurements across 2 institutions)<br>
-    T½ = 1925.2 days (NIST Co-60, not Elekta's 5.26 yr)
-  </div>
-  <p>Validated across <strong>Perfexion, Icon, and Esprit</strong> — same source assembly, same S. Five verified cases show ≤1% agreement with independent TLD measurements.</p>
-  <p style="font-size:0.8rem;color:#64748b;">Machine physics data is cloud-safe. Patient data stays local — always.</p>
-</div>
-
-<div class="cta">
-  <h2>Interested in using these tools?</h2>
-  <p>GK Hub is actively developed. If you're a Gamma Knife physicist, dosimetrist, or researcher — let's connect.</p>
-  <a class="btn" href="mailto:coder3q@gmail.com?subject=GKPhysics%20Tools%20—%20Interested">Email Me →</a>
-  <p style="font-size:0.75rem;color:#64748b;margin-top:0.8rem;">coder3q@gmail.com</p>
-</div>
-
-<div class="footer">
-  © 2026 GKPhysics — Validated across Perfexion, Icon, and Esprit
-</div>
+<script>
+function showTool(id) {
+  document.querySelectorAll('.tool-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('tool-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
 
 </body>
 </html>
