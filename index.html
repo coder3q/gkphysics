@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GKPhysics — Gamma Knife Physics Tools</title>
-<meta property="og:title" content="GKPhysics — Gamma Knife Physics Tools">
-<meta property="og:description" content="A modular platform for Gamma Knife medical physicists. Validated across Perfexion, Icon, and Esprit.">
+<title>GK Tools — Gamma Knife Apps</title>
+<meta property="og:title" content="GK Tools — Gamma Knife Apps">
+<meta property="og:description" content="A modular platform for Gamma Knife Apps. Validated across Perfexion, Icon, and Esprit.">
 <meta property="og:url" content="https://coder3q.github.io/gkphysics/">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Josefin+Sans:wght@400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@ a{color:#D97757;text-decoration:none;}
 .tool-view{display:none;padding:1.5rem 2rem;flex:1;}
 .tool-view.active{display:block;}
 .tool-view h2{font-size:1.5rem;font-weight:700;margin-bottom:0.3rem;}
-.tool-view .tool-desc{color:#94a3b8;font-size:0.9rem;margin-bottom:1rem;}
+.tool-view .tool-desc{color:#cbd5e1;font-size:0.95rem;font-weight:500;margin-bottom:1rem;}
 .tool-view .tool-tags{display:flex;gap:0.5rem;margin-bottom:1rem;}
 .tool-tag{font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:3px;font-weight:600;}
 .tag-live{background:rgba(118,185,0,0.15);color:#9be36b;}
@@ -63,8 +63,8 @@ a{color:#D97757;text-decoration:none;}
 .cta{text-align:center;padding:2rem;border-top:1px solid #2d3748;margin-top:auto;}
 .cta h2{font-size:1.2rem;margin-bottom:0.3rem;}
 .cta p{color:#94a3b8;font-size:0.9rem;margin-bottom:0.8rem;}
-.cta a.btn{display:inline-block;background:#3d6b00;color:#0f0f0f;font-weight:700;padding:0.6rem 1.8rem;border-radius:6px;font-size:0.95rem;}
-.cta a.btn:hover{background:#76b900;}
+.cta a.btn{display:inline-block;background:#7CFC00;color:#0f0f0f;font-weight:800;padding:0.7rem 2rem;border-radius:6px;font-size:0.98rem;box-shadow:0 0 18px rgba(124,252,0,0.28);box-shadow:0 0 18px rgba(124,252,0,0.28);}
+.cta a.btn:hover{background:#9AFF00;}
 .cta .email{font-size:0.85rem;color:#94a3b8;margin-top:0.5rem;}
 
 /* Footer */
@@ -142,21 +142,20 @@ a{color:#D97757;text-decoration:none;}
 <!-- Main -->
 <div class="main">
   <div class="header">
-    <h1>GKPhysics Tools</h1>
-    <div class="tagline">A modular platform for Gamma Knife medical physicists</div>
+    <h1>GK Tools</h1>
+    <div class="tagline">A modular platform for Gamma Knife Apps</div>
   </div>
 
   <!-- PATIENT: Patient Today -->
   <div class="tool-view active" id="tool-patient-today">
     <h2>Patient Today</h2>
-    <div class="tool-desc">Real-time treatment schedule board — designed for waiting area monitors and nurse stations.</div>
+    <div class="tool-desc">Real-time treatment schedule board — built for clear visibility in GK team working areas.</div>
     <div class="tool-tags">
       <span class="tool-tag tag-local">Local Only</span>
       <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
     </div>
     <img src="img/patient-today.jpg" alt="Patient Today">
-    <div class="caption">Live schedule view — patient data stays within your network</div>
-  </div>
+</div>
 
   <!-- PATIENT: Statistics -->
   <div class="tool-view" id="tool-statistics">
@@ -167,8 +166,7 @@ a{color:#D97757;text-decoration:none;}
       <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
     </div>
     <img src="img/statistics.jpg" alt="Statistics">
-    <div class="caption">Aggregated treatment statistics from your local database</div>
-  </div>
+</div>
 
   <!-- PATIENT: Search -->
   <div class="tool-view" id="tool-search">
@@ -179,19 +177,14 @@ a{color:#D97757;text-decoration:none;}
       <span class="tool-tag tag-hipaa">HIPAA — Never Cloud</span>
     </div>
     <img src="img/search.jpg" alt="Search">
-    <div class="caption">Full-text search across treatment records</div>
-  </div>
+</div>
 
   <!-- MACHINE: Dose Rate -->
   <div class="tool-view" id="tool-dose-rate">
     <h2>Dose Rate Calculator</h2>
-    <div class="tool-desc">The S factor is not static&mdash;it is a community-evolving parameter. Through open data fitting and continuous user-side validation, its accuracy converges over time.</div>
-    <div class="tool-tags">
-      <span class="tool-tag tag-live">Live — Cloud OK</span>
-    </div>
+    <div class="tool-desc">Verify your measured dose rate against a community-estimated value — and contribute new data to improve the calculator’s accuracy, weight, and credibility over time.</div>
     <img src="img/dose-rate.jpg" alt="Dose Rate Calculator">
-    <div class="caption">Validated on Icon &amp; Esprit (2 sites) — Perfexion shares same source assembly</div>
-    <div class="detail-box">
+<div class="detail-box">
       <h3>Physics</h3>
       <div class="formula">
         DR<sub>corrected</sub> = S × DR<sub>estimated</sub><br>
@@ -206,46 +199,30 @@ a{color:#D97757;text-decoration:none;}
   <!-- MACHINE: Cable Extension -->
   <div class="tool-view" id="tool-cable">
     <h2>Cable Extension</h2>
-    <div class="tool-desc">Automated cable length correction analysis — eliminates manual spreadsheet work.</div>
-    <div class="tool-tags">
-      <span class="tool-tag tag-live">Live — Cloud OK</span>
-    </div>
+    <div class="tool-desc">Turn a multi-step, hand-straining daily task into one simple cable connection.</div>
     <img src="img/cable.jpg" alt="Cable Extension">
-    <div class="caption">Cable extension measurement and analysis tool</div>
-  </div>
+</div>
 
   <!-- MACHINE: HDMM 0.01mm -->
   <div class="tool-view" id="tool-hdmm">
     <h2>HDMM Tool — 0.01mm Precision</h2>
-    <div class="tool-desc">High-Definition Motion Management analysis at 0.01mm resolution — beyond standard QA precision.</div>
-    <div class="tool-tags">
-      <span class="tool-tag tag-live">Live — Cloud OK</span>
-    </div>
+    <div class="tool-desc">Verify HDMM accuracy across four degrees of freedom to 0.01 mm precision.</div>
     <img src="img/hdmm.jpg" alt="HDMM Tool">
-    <div class="caption">HDMM measurement at 0.01mm precision</div>
-  </div>
+</div>
 
   <!-- MACHINE: Filmless Profile -->
   <div class="tool-view" id="tool-filmless">
     <h2>Filmless Profile</h2>
-    <div class="tool-desc">Beam profile analysis without film — digital measurement replaces traditional film dosimetry.</div>
-    <div class="tool-tags">
-      <span class="tool-tag tag-live">Live — Cloud OK</span>
-    </div>
-    <img src="img/filmless.jpg" alt="Filmless Profile">
-    <div class="caption">Digital beam profile measurement — no film required</div>
-  </div>
+    <div class="tool-desc">Beam profile analysis without film — completed in hours, not days.</div>
+    <img src="img/filmless3x3v2.jpg" alt="Filmless Profile">
+</div>
 
   <!-- MACHINE: Timer Error -->
   <div class="tool-view" id="tool-timer-error">
     <h2>Timer Error — All 3 Collimators</h2>
     <div class="tool-desc">Timer error analysis across 4mm, 8mm, and 16mm collimators — one measurement session, all results.</div>
-    <div class="tool-tags">
-      <span class="tool-tag tag-live">Live — Cloud OK</span>
-    </div>
     <img src="img/timer-error.jpg" alt="Timer Error">
-    <div class="caption">Timer error for 4mm, 8mm, and 16mm collimators</div>
-  </div>
+</div>
 
   <!-- About -->
   <div class="tool-view" id="tool-about">
@@ -258,9 +235,9 @@ a{color:#D97757;text-decoration:none;}
     </div>
     <div class="detail-box" style="margin-top:0.8rem;">
       <h3>Architecture</h3>
-      <p>Built with Python 3.12 + NiceGUI. SQLite for machine data.</p>
+      
       <p>Modular: one tool = one file. Each tool is self-contained.</p>
-      <p>Patient data stays local (HIPAA). Machine physics data is cloud-safe.</p>
+      <p>Patient data stays local (HIPAA). .</p>
       <p>Validated across <strong>Perfexion, Icon, and Esprit</strong>.</p>
     </div>
   </div>
@@ -270,31 +247,106 @@ a{color:#D97757;text-decoration:none;}
     <h2>Contact</h2>
     <div class="detail-box">
       <h3>Interested in using these tools?</h3>
-      <p>GK Hub is actively developed. If you're a Gamma Knife physicist, dosimetrist, or researcher — let's connect.</p>
-      <p style="margin-top:0.8rem;"><a class="btn" href="mailto:gkresearch.nyu@gmail.com?subject=GKPhysics%20Tools%20—%20Interested" style="display:inline-block;background:#3d6b00;color:#0f0f0f;font-weight:700;padding:0.6rem 1.8rem;border-radius:6px;font-size:0.95rem;text-decoration:none;">Email Me →</a></p>
-      <p style="font-size:0.8rem;color:#64748b;margin-top:0.5rem;">gkresearch.nyu@gmail.com</p>
-    </div>
+      <p>GK Tools is actively developed. Professionals in neurosurgery, radiation oncology, medical physics, administration, or anyone interested in Gamma Knife technology — let’s connect for collaboration opportunities.</p>
+      <p style="margin-top:0.8rem;"><a class="btn" href="mailto:gammaknifeAI@gmail.com" style="display:inline-block;background:#7CFC00;color:#0f0f0f;font-weight:800;padding:0.7rem 2rem;border-radius:6px;font-size:0.98rem;box-shadow:0 0 18px rgba(124,252,0,0.28);text-decoration:none;">Send email to: gammaknifeAI@gmail.com</a></p>
+</div>
   </div>
 
   <!-- CTA (always visible at bottom) -->
   <div class="cta">
     <h2>Interested in these tools?</h2>
-    <p>If you're a Gamma Knife physicist — let's connect.</p>
-    <a class="btn" href="mailto:gkresearch.nyu@gmail.com?subject=GKPhysics%20Tools%20—%20Interested">Email Me →</a>
-    <div class="email" style="font-size:0.85rem;color:#94a3b8;margin-top:0.6rem;">gkresearch.nyu@gmail.com</div>
-  </div>
+    <a class="btn" href="mailto:gammaknifeAI@gmail.com">Send email to: gammaknifeAI@gmail.com</a>
+</div>
 
   <div class="footer">© 2026 GKPhysics — Validated across Perfexion, Icon, and Esprit</div>
 </div>
 
+
+
+
 <script>
-function showTool(id) {
-  document.querySelectorAll('.tool-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('tool-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
-  window.scrollTo(0, 0);
-}
+(function(){
+  let autoRotate = true;
+  let timer = null;
+
+  const patientItems = ['patient-today', 'statistics', 'search'];
+  const machineItems = ['dose-rate', 'cable', 'hdmm', 'filmless', 'timer-error'];
+  const orderedItems = [...patientItems, ...machineItems];
+
+  function getDelay(toolId) {
+    return patientItems.includes(toolId) ? 3000 : 1000;
+  }
+
+  function stopRotation() {
+    autoRotate = false;
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+
+  function setActiveById(toolId) {
+    document.querySelectorAll('.tool-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+    const main = document.getElementById('tool-' + toolId);
+    if (main) main.classList.add('active');
+
+    document.querySelectorAll('.nav-item').forEach(el => {
+      const oc = el.getAttribute('onclick') || '';
+      if (oc.includes("showTool('" + toolId + "')")) {
+        el.classList.add('active');
+      }
+    });
+  }
+
+  window.showTool = function(toolId, fromUser=true) {
+    setActiveById(toolId);
+    if (fromUser) stopRotation();
+  };
+
+  function nextTool(current) {
+    const idx = orderedItems.indexOf(current);
+    if (idx < 0 || idx === orderedItems.length - 1) return orderedItems[0];
+    return orderedItems[idx + 1];
+  }
+
+  function currentToolId() {
+    const active = document.querySelector('.tool-view.active');
+    if (!active) return orderedItems[0];
+    return active.id.replace('tool-','');
+  }
+
+  function scheduleNext() {
+    if (!autoRotate) return;
+    const cur = currentToolId();
+    const delay = getDelay(cur);
+    timer = setTimeout(() => {
+      const nxt = nextTool(cur);
+      setActiveById(nxt);
+      scheduleNext();
+    }, delay);
+  }
+
+  // clicking anywhere on sidebar nav items stops rotation
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.addEventListener('click', function() {
+        stopRotation();
+      });
+    });
+
+    // clicking main content (tool image, text area) also stops rotation
+    document.querySelectorAll('.tool-view').forEach(el => {
+      el.addEventListener('click', function() {
+        stopRotation();
+      });
+    });
+
+    // default start on current active item
+    scheduleNext();
+  });
+})();
 </script>
 
 </body>
