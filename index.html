@@ -77,6 +77,45 @@ a{color:#D97757;text-decoration:none;}
   .principles,.sidebar-footer,.sec-title,hr{display:none;}
   .nav-item{font-size:0.65rem;padding:0.25rem 0.4rem;}
 }
+
+/* Floating controls for rotating tool views */
+.tool-controls{
+  position:absolute;
+  top:0.75rem;
+  right:0.75rem;
+  z-index:20;
+  display:flex;
+  gap:0.45rem;
+  background:rgba(17,24,39,0.88);
+  border:1px solid #2d3748;
+  border-radius:999px;
+  padding:0.35rem 0.5rem;
+  backdrop-filter:blur(6px);
+}
+.tool-control-btn{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid #425066;
+  background:#111827;
+  color:#e8e8e8;
+  font-size:0.95rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all 0.15s;
+}
+.tool-control-btn:hover{
+  background:#1f2937;
+  color:#7CFC00;
+  border-color:#7CFC00;
+}
+.tool-body-wrap{
+  position:relative;
+}
+
 </style>
 </head>
 <body>
@@ -141,7 +180,15 @@ a{color:#D97757;text-decoration:none;}
 
 <!-- Main -->
 <div class="main">
-  <div class="header">
+  
+<div class="tool-body-wrap">
+  <div class="tool-controls">
+    <button id="tool-prev" class="tool-control-btn" aria-label="Previous">&lt;</button>
+    <button id="tool-playpause" class="tool-control-btn" aria-label="Pause">||</button>
+    <button id="tool-next" class="tool-control-btn" aria-label="Next">&gt;</button>
+  </div>
+
+<div class="header">
     <h1>GK Tools</h1>
     <div class="tagline">A modular platform for Gamma Knife Apps</div>
   </div>
@@ -258,8 +305,12 @@ a{color:#D97757;text-decoration:none;}
     <a class="btn" href="mailto:gammaknifeAI@gmail.com">Send email to: gammaknifeAI@gmail.com</a>
 </div>
 
+</div>
   <div class="footer">© 2026 GKPhysics — Validated across Perfexion, Icon, and Esprit</div>
 </div>
+
+
+
 
 
 
@@ -269,12 +320,21 @@ a{color:#D97757;text-decoration:none;}
   let autoRotate = true;
   let timer = null;
 
-  const patientItems = ['patient-today', 'statistics', 'search'];
-  const machineItems = ['dose-rate', 'cable', 'hdmm', 'filmless', 'timer-error'];
-  const orderedItems = [...patientItems, ...machineItems];
+  const orderedItems = [
+    'patient-today',
+    'statistics',
+    'search',
+    'dose-rate',
+    'cable',
+    'hdmm',
+    'filmless',
+    'timer-error'
+  ];
+
+  const slowItems = new Set(['patient-today', 'dose-rate', 'filmless']);
 
   function getDelay(toolId) {
-    return patientItems.includes(toolId) ? 3000 : 1000;
+    return slowItems.has(toolId) ? 3000 : 1000;
   }
 
   function stopRotation() {
@@ -283,6 +343,24 @@ a{color:#D97757;text-decoration:none;}
       clearTimeout(timer);
       timer = null;
     }
+    updatePlayPause();
+  }
+
+  function startRotation() {
+    autoRotate = true;
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    updatePlayPause();
+    scheduleNext();
+  }
+
+  function updatePlayPause() {
+    const btn = document.getElementById('tool-playpause');
+    if (!btn) return;
+    btn.textContent = autoRotate ? '||' : '▶';
+    btn.setAttribute('aria-label', autoRotate ? 'Pause' : 'Play');
   }
 
   function setActiveById(toolId) {
@@ -300,21 +378,24 @@ a{color:#D97757;text-decoration:none;}
     });
   }
 
-  window.showTool = function(toolId, fromUser=true) {
-    setActiveById(toolId);
-    if (fromUser) stopRotation();
-  };
-
-  function nextTool(current) {
-    const idx = orderedItems.indexOf(current);
-    if (idx < 0 || idx === orderedItems.length - 1) return orderedItems[0];
-    return orderedItems[idx + 1];
-  }
-
   function currentToolId() {
     const active = document.querySelector('.tool-view.active');
     if (!active) return orderedItems[0];
     return active.id.replace('tool-','');
+  }
+
+  function nextToolId() {
+    const cur = currentToolId();
+    const idx = orderedItems.indexOf(cur);
+    if (idx < 0 || idx === orderedItems.length - 1) return orderedItems[0];
+    return orderedItems[idx + 1];
+  }
+
+  function prevToolId() {
+    const cur = currentToolId();
+    const idx = orderedItems.indexOf(cur);
+    if (idx <= 0) return orderedItems[orderedItems.length - 1];
+    return orderedItems[idx - 1];
   }
 
   function scheduleNext() {
@@ -322,28 +403,65 @@ a{color:#D97757;text-decoration:none;}
     const cur = currentToolId();
     const delay = getDelay(cur);
     timer = setTimeout(() => {
-      const nxt = nextTool(cur);
-      setActiveById(nxt);
+      setActiveById(nextToolId());
       scheduleNext();
     }, delay);
   }
 
-  // clicking anywhere on sidebar nav items stops rotation
+  window.showTool = function(toolId, fromUser=true) {
+    setActiveById(toolId);
+    if (fromUser) stopRotation();
+  };
+
   document.addEventListener('DOMContentLoaded', function() {
+    updatePlayPause();
+
     document.querySelectorAll('.nav-item').forEach(el => {
       el.addEventListener('click', function() {
         stopRotation();
       });
     });
 
-    // clicking main content (tool image, text area) also stops rotation
     document.querySelectorAll('.tool-view').forEach(el => {
-      el.addEventListener('click', function() {
-        stopRotation();
+      el.addEventListener('click', function(e) {
+        // clicking on content area stops rotation
+        if (!e.target.closest('.tool-controls')) {
+          stopRotation();
+        }
       });
     });
 
-    // default start on current active item
+    const prevBtn = document.getElementById('tool-prev');
+    const playBtn = document.getElementById('tool-playpause');
+    const nextBtn = document.getElementById('tool-next');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        stopRotation();
+        setActiveById(prevToolId());
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        stopRotation();
+        setActiveById(nextToolId());
+      });
+    }
+
+    if (playBtn) {
+      playBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (autoRotate) {
+          stopRotation();
+        } else {
+          startRotation();
+        }
+      });
+    }
+
     scheduleNext();
   });
 })();
